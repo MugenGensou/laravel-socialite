@@ -1,0 +1,24 @@
+{
+    "name": "mugen/laravel-socialite",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "aki",
+            "email": "mj501738931@126.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Mugen\\LaravelSocialite\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mugen\\LaravelSocialite\\SocialiteServiceProvider"
+            ]
+        }
+    }
+}
