@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Mugen\LaravelSocialite\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -23,8 +23,7 @@ class SocialiteServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../condig/socialite.php', 'socialite');
 
         $this->app->singleton(SocialiteManager::class, function ($app) {
-            $config = array_merge(config('socialite.services', []), config('services', []));
-            return new SocialiteManager($config, $app->make('request'));
+            return new SocialiteManager(config('socialite.services', []), $app->make('request'));
         });
     }
 
@@ -37,7 +36,8 @@ class SocialiteServiceProvider extends ServiceProvider
             __DIR__ . '/../condig/socialite.php' => config_path('socialite.php'),
         ]);
 
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        if (config('socialite.auto_save'))
+            $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
     /**

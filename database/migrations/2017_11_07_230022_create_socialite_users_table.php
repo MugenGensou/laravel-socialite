@@ -15,7 +15,7 @@ class CreateSocialiteUsersTable extends Migration
     {
         Schema::create('socialite_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->enum('platform', [
                 'web',
                 'app',

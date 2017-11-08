@@ -3,16 +3,26 @@
 return [
 
     /**
+     * Debug mode
+     */
+    'debug'     => env('SOCIALITE_DEBUG', false),
+
+    /**
+     * Databse
+     */
+    'auto_save' => env('SOCIALITE_AUTO_SAVE', false),
+
+    /**
      * Auth configs
      */
-    'auth'     => [
+    'auth'      => [
         'model' => 'App\User',
     ],
 
     /**
      * Service lists
      */
-    'services' => [
+    'services'  => [
 
         /**
          * Wiki:
@@ -20,6 +30,7 @@ return [
         'facebook'    => [
             'client_id'     => env('SOCIALITE_FACEBOOK_APP_ID'),
             'client_secret' => env('SOCIALITE_FACEBOOK_SECRET'),
+            'redirect'      => url('socialite/example/callback.php'),
             'scopes'        => explode(',', env('SOCIALITE_FACEBOOK_SCOPES')),
         ],
 
@@ -29,6 +40,7 @@ return [
         'github'      => [
             'client_id'     => env('SOCIALITE_GITHUB_APP_ID'),
             'client_secret' => env('SOCIALITE_GITHUB_SECRET'),
+            'redirect'      => url('socialite/example/callback.php'),
             'scopes'        => explode(',', env('SOCIALITE_GITHUB_SCOPES')),
         ],
 
@@ -38,6 +50,7 @@ return [
         'google'      => [
             'client_id'     => env('SOCIALITE_GOOGLE_APP_ID'),
             'client_secret' => env('SOCIALITE_GOOGLE_SECRET'),
+            'redirect'      => url('socialite/example/callback.php'),
             'scopes'        => explode(',', env('SOCIALITE_GOOGLE_SCOPES')),
         ],
 
@@ -47,6 +60,7 @@ return [
         'linkedin'    => [
             'client_id'     => env('SOCIALITE_LINKEDIN_APP_ID'),
             'client_secret' => env('SOCIALITE_LINKEDIN_SECRET'),
+            'redirect'      => url('socialite/example/callback.php'),
             'scopes'        => explode(',', env('SOCIALITE_LINKEDIN_SCOPES')),
         ],
 
@@ -56,6 +70,7 @@ return [
         'weibo'       => [
             'client_id'     => env('SOCIALITE_WEIBO_APP_ID'),
             'client_secret' => env('SOCIALITE_WEIBO_SECRET'),
+            'redirect'      => url('socialite/example/callback.php'),
             'scopes'        => explode(',', env('SOCIALITE_WEIBO_SCOPES')),
         ],
 
@@ -65,6 +80,7 @@ return [
         'qq'          => [
             'client_id'     => env('SOCIALITE_QQ_APP_ID'),
             'client_secret' => env('SOCIALITE_QQ_SECRET'),
+            'redirect'      => url('socialite/example/callback.php'),
             'scopes'        => array_unique(array_merge(
                 ['get_user_info'],
                 explode(',', env('SOCIALITE_WEIBO_SCOPES'))
@@ -77,6 +93,7 @@ return [
         'wechat'      => [
             'client_id'     => env('SOCIALITE_WECHAT_APP_ID'),
             'client_secret' => env('SOCIALITE_WECHAT_SECRET'),
+            'redirect'      => url('socialite/example/callback.php'),
             'scopes'        => array_unique(array_merge(
                 ['snsapi_base', 'snsapi_userinfo'],
                 explode(',', env('SOCIALITE_WEIBO_SCOPES'))
@@ -84,11 +101,12 @@ return [
         ],
 
         /**
-         * Wiki: https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419316505&token=&lang=zh_CN
+         * Wiki: https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&t=resource/res_list&verify=1&id=open1419318590&token=&lang=zh_CN
          */
         'wechat_open' => [
             'client_id'     => env('SOCIALITE_WECHAT_OPEN_APP_ID'),
-            'client_secret' => env('SOCIALITE_WECHAT_OPEN_SECRET'),
+            'client_secret' => ['your-component-appid', 'your-component-access-token'],
+            'redirect'      => url('socialite/example/callback.php'),
             'scopes'        => ['snsapi_login']
         ],
 
@@ -98,6 +116,7 @@ return [
         'douban'      => [
             'client_id'     => env('SOCIALITE_DOUBANT_OPEN_APP_ID'),
             'client_secret' => env('SOCIALITE_DOUBANT_OPEN_SECRET'),
+            'redirect'      => url('socialite/example/callback.php'),
             'scopes'        => explode(',', env('SOCIALITE_DOUBAN_SCOPES')),
         ],
 
