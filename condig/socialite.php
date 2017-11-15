@@ -30,7 +30,7 @@ return [
         'facebook'    => [
             'client_id'     => env('SOCIALITE_FACEBOOK_APP_ID'),
             'client_secret' => env('SOCIALITE_FACEBOOK_SECRET'),
-            'redirect'      => url('socialite/example/callback.php'),
+            'redirect'      => 'socialite/example/callback.php',
             'scopes'        => explode(',', env('SOCIALITE_FACEBOOK_SCOPES')),
         ],
 
@@ -40,7 +40,7 @@ return [
         'github'      => [
             'client_id'     => env('SOCIALITE_GITHUB_APP_ID'),
             'client_secret' => env('SOCIALITE_GITHUB_SECRET'),
-            'redirect'      => url('socialite/example/callback.php'),
+            'redirect'      => 'socialite/example/callback.php',
             'scopes'        => explode(',', env('SOCIALITE_GITHUB_SCOPES')),
         ],
 
@@ -50,7 +50,7 @@ return [
         'google'      => [
             'client_id'     => env('SOCIALITE_GOOGLE_APP_ID'),
             'client_secret' => env('SOCIALITE_GOOGLE_SECRET'),
-            'redirect'      => url('socialite/example/callback.php'),
+            'redirect'      => 'socialite/example/callback.php',
             'scopes'        => explode(',', env('SOCIALITE_GOOGLE_SCOPES')),
         ],
 
@@ -60,7 +60,7 @@ return [
         'linkedin'    => [
             'client_id'     => env('SOCIALITE_LINKEDIN_APP_ID'),
             'client_secret' => env('SOCIALITE_LINKEDIN_SECRET'),
-            'redirect'      => url('socialite/example/callback.php'),
+            'redirect'      => 'socialite/example/callback.php',
             'scopes'        => explode(',', env('SOCIALITE_LINKEDIN_SCOPES')),
         ],
 
@@ -70,7 +70,7 @@ return [
         'weibo'       => [
             'client_id'     => env('SOCIALITE_WEIBO_APP_ID'),
             'client_secret' => env('SOCIALITE_WEIBO_SECRET'),
-            'redirect'      => url('socialite/example/callback.php'),
+            'redirect'      => 'socialite/example/callback.php',
             'scopes'        => explode(',', env('SOCIALITE_WEIBO_SCOPES')),
         ],
 
@@ -80,7 +80,7 @@ return [
         'qq'          => [
             'client_id'     => env('SOCIALITE_QQ_APP_ID'),
             'client_secret' => env('SOCIALITE_QQ_SECRET'),
-            'redirect'      => url('socialite/example/callback.php'),
+            'redirect'      => 'socialite/example/callback.php',
             'scopes'        => array_unique(array_merge(
                 ['get_user_info'],
                 explode(',', env('SOCIALITE_WEIBO_SCOPES'))
@@ -93,7 +93,7 @@ return [
         'wechat'      => [
             'client_id'     => env('SOCIALITE_WECHAT_APP_ID'),
             'client_secret' => env('SOCIALITE_WECHAT_SECRET'),
-            'redirect'      => url('socialite/example/callback.php'),
+            'redirect'      => 'socialite/example/callback.php',
             'scopes'        => array_unique(array_merge(
                 ['snsapi_base', 'snsapi_userinfo'],
                 explode(',', env('SOCIALITE_WEIBO_SCOPES'))
@@ -106,7 +106,7 @@ return [
         'wechat_open' => [
             'client_id'     => env('SOCIALITE_WECHAT_OPEN_APP_ID'),
             'client_secret' => ['your-component-appid', 'your-component-access-token'],
-            'redirect'      => url('socialite/example/callback.php'),
+            'redirect'      => 'socialite/example/callback.php',
             'scopes'        => ['snsapi_login']
         ],
 
@@ -114,9 +114,9 @@ return [
          * Wiki:
          */
         'douban'      => [
-            'client_id'     => env('SOCIALITE_DOUBANT_OPEN_APP_ID'),
-            'client_secret' => env('SOCIALITE_DOUBANT_OPEN_SECRET'),
-            'redirect'      => url('socialite/example/callback.php'),
+            'client_id'     => env('SOCIALITE_DOUBAN_OPEN_APP_ID'),
+            'client_secret' => env('SOCIALITE_DOUBAN_OPEN_SECRET'),
+            'redirect'      => 'socialite/example/callback.php',
             'scopes'        => explode(',', env('SOCIALITE_DOUBAN_SCOPES')),
         ],
 
