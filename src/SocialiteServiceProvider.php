@@ -20,7 +20,7 @@ class SocialiteServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../condig/socialite.php', 'socialite');
+        $this->mergeConfigFrom(__DIR__ . '/../config/socialite.php', 'socialite');
 
         $this->app->singleton(SocialiteManager::class, function ($app) {
             return new SocialiteManager(config('socialite.services', []), $app->make('request'));
@@ -33,7 +33,7 @@ class SocialiteServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../condig/socialite.php' => config_path('socialite.php'),
+            __DIR__ . '/../config/socialite.php' => config_path('socialite.php'),
         ]);
 
         if (config('socialite.auto_save'))
