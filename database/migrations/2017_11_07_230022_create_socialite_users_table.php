@@ -15,7 +15,7 @@ class CreateSocialiteUsersTable extends Migration
     {
         Schema::create('socialite_users', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedInteger('user_id')->nullable()->index();
             $table->enum('platform', [
                 'web',
                 'app',
@@ -36,13 +36,13 @@ class CreateSocialiteUsersTable extends Migration
             $table->string('name')->default('');
             $table->string('email')->default('');
             $table->string('avatar')->default('');
-            $table->json('token');
+            $table->json('token')->nullable();
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
-            $table->index([
-                'user_id',
+            $table->unique([
                 'platform',
                 'provider',
+                'open_id',
             ], 'socialite_user');
         });
     }

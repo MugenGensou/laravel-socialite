@@ -1,6 +1,6 @@
 <?php
 
-namespace Overtrue\LaravelWeChat\Events;
+namespace Mugen\LaravelSocialite\Events;
 
 use Illuminate\Queue\SerializesModels;
 use Mugen\LaravelSocialite\Entities\SocialiteUser;
@@ -36,19 +36,6 @@ class SocialiteUserAuthorized
         $this->user = $user;
 
         $this->isNewSession = $isNewSession;
-
-        if (config('socialite.auto_save'))
-            $this->socialiteUser = SocialiteUser::create([
-                'paltform' => 'web',
-                'provider' => $user->getProviderName(),
-                'open_id'  => $user->getId(),
-                'nickname' => $user->getNickname(),
-                'name'     => $user->getName(),
-                'email'    => $user->getEmail(),
-                'avatar'   => $user->getAvatar(),
-                'token'    => $user->getToken()->toArray(),
-            ]);
-
     }
 
     /**
@@ -77,5 +64,13 @@ class SocialiteUserAuthorized
     public function getSocialiteUser():?SocialiteUser
     {
         return $this->socialiteUser;
+    }
+
+    /**
+     * @param SocialiteUser $socialiteUser
+     */
+    public function setSocialiteUser(SocialiteUser $socialiteUser): void
+    {
+        $this->socialiteUser = $socialiteUser;
     }
 }

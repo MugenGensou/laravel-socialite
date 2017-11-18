@@ -1,10 +1,11 @@
 <?php
 
-namespace Mugen\LaravelSocialite\Http\Middlewares;
+namespace Mugen\LaravelSocialite\Http\Middleware;
 
 use Closure;
+use Event;
 use Log;
-use Overtrue\LaravelWeChat\Events\SocialiteUserAuthorized;
+use Mugen\LaravelSocialite\Events\SocialiteUserAuthorized;
 use Overtrue\Socialite\SocialiteManager;
 
 class SocialiteAuthenticate
@@ -21,13 +22,14 @@ class SocialiteAuthenticate
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \Closure $next
+     * @param string|null $provider
      * @return mixed
      */
     public function handle($request, Closure $next, string $provider = null)
     {
         $isNewSession = false;
 
-        $provider = strtolower($provider ?? $request->get('provider'));
+        $provider = strtolower($provider ?? $request->route('provider') ?? $request->get('provider'));
 
         if (empty($provider) || !in_array($provider, array_keys(config("socialite.services")))) {
             config('socialite.debug') && Log::debug('Not support this provider.');
