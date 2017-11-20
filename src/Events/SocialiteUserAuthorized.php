@@ -28,12 +28,12 @@ class SocialiteUserAuthorized
     /**
      * Create a new event instance.
      *
-     * @param \Overtrue\Socialite\User $user
+     * @param array $user
      * @param bool $isNewSession
      */
-    public function __construct(User $user, bool $isNewSession = false)
+    public function __construct(array $user, bool $isNewSession = false)
     {
-        $this->user = $user;
+        $this->user = new User($user);
 
         $this->isNewSession = $isNewSession;
     }
@@ -63,14 +63,16 @@ class SocialiteUserAuthorized
      */
     public function getSocialiteUser():?SocialiteUser
     {
-        return $this->socialiteUser;
-    }
-
-    /**
-     * @param SocialiteUser $socialiteUser
-     */
-    public function setSocialiteUser(SocialiteUser $socialiteUser): void
-    {
-        $this->socialiteUser = $socialiteUser;
+        return $this->socialiteUser ?: $this->socialiteUser = tap(SocialiteUser::firstOrCreate([
+            'platform' => 'web',
+            'provider' => $this->user->getProviderName(),
+            'open_id'  => $this->user->getId(),
+        ]))->update([
+            'nickname' => $this->user->getNickname() ?? '',
+            'name'     => $this->user->getName() ?? '',
+            'email'    => $this->user->getEmail() ?? '',
+            'avatar'   => $this->user->getAvatar() ?? '',
+            'token'    => $this->user->getToken() ? $this->user->getToken()->toJSON() : '{}',
+        ]);
     }
 }

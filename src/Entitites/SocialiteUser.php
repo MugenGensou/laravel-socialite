@@ -15,7 +15,7 @@ class SocialiteUser extends Model
         'name'     => 'string',
         'email'    => 'string',
         'avatar'   => 'string',
-        'token'    => 'string',
+        'token'    => 'collection',
     ];
     protected $fillable = [
         'user_id',
@@ -36,6 +36,6 @@ class SocialiteUser extends Model
 
     public function user()
     {
-        return $this->belongsTo(config('socialite.auth.model'), 'user_id');
+        return $this->belongsTo(config('auth.providers.users.model'), 'user_id');
     }
 }

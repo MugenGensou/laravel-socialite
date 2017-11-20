@@ -3,26 +3,23 @@
 return [
 
     /**
-     * Debug mode
+     * Enable mock user.
      */
-    'debug'       => env('SOCIALITE_DEBUG', false),
+    'enable_mock' => env('SOCIALITE_ENABLE_MOCK', false),
 
     /**
-     * Databse
+     * Mock user.
      */
-    'auto_save'   => env('SOCIALITE_AUTO_SAVE', false),
-
-    /**
-     * Auth configs
-     */
-    'auth'        => [
-        'model' => 'App\User',
+    'mock_user'   => [
+        'open_id'  => 'ob4lr0nfQDLoICVSY08pDydxZing',
+        'nickname' => 'Mugen Aki',
+        'sex'      => '1',
     ],
 
     /**
      * Service lists
      */
-    'services'    => [
+    'providers'   => [
 
         /**
          * Wiki:
@@ -120,21 +117,6 @@ return [
             'scopes'        => explode(',', env('SOCIALITE_DOUBAN_SCOPES')),
         ],
 
-    ],
-
-    /**
-     * Enable mock user.
-     */
-    'enable_mock' => env('SOCIALITE_ENABLE_MOCK', false),
-
-    /**
-     * Mock user.
-     */
-    'mock_user'   => [
-        'open_id'  => 'ob4lr0nfQDLoICVSY08pDydxZing',
-        'name'     => 'Mugen Aki',
-        'nickname' => 'Mugen Aki',
-        'sex'      => '1',
     ],
 
 ];

@@ -27,7 +27,7 @@ class SocialiteServiceProvider extends ServiceProvider
         $this->setupConfig();
 
         $this->app->singleton(SocialiteManager::class, function ($app) {
-            return new SocialiteManager(config('socialite.services', []), $app->make('request'));
+            return new SocialiteManager(config('socialite.providers', []), $app->make('request'));
         });
     }
 
@@ -36,10 +36,7 @@ class SocialiteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (config('socialite.auto_save')) {
-            $this->setupDatabase();
-            $this->setupEvents();
-        }
+        $this->setupDatabase();
 
         if (config('socialite.enable_mock'))
             $this->setupMockAuthUser();
@@ -80,34 +77,24 @@ class SocialiteServiceProvider extends ServiceProvider
     }
 
     /**
-     * Setup the events & listeners.
-     */
-    protected function setupEvents()
-    {
-        Event::listen(SocialiteUserAuthorized::class, AutoSaveSocialiteUser::class);
-    }
-
-    /**
      * Set mock login
      */
     protected function setupMockAuthUser()
     {
-        $request  = $this->app->make('request');
-        $provider = $request->get('provider') ?? $request->route('provider');
-        $user     = config('socialite.mock_user');
+        $user = config('socialite.mock_user');
 
         if (is_array($user) && !empty($user['open_id'])) {
             $user = (new User([
                 'id'       => array_get($user, 'open_id'),
-                'name'     => array_get($user, 'name'),
+                'name'     => array_get($user, 'nickname'),
                 'nickname' => array_get($user, 'nickname'),
                 'avatar'   => array_get($user, 'avatar'),
                 'email'    => null,
-            ]))
-                ->merge(['original' => $user])
-                ->setProviderName($provider);
+            ]))->merge(['original' => $user]);
 
-            session(["socialite.{$provider}.user" => $user]);
+            foreach (array_keys(config('socialite.providers', [])) as $provider) {
+                session(["socialite.{$provider}.user" => $user->setProviderName($provider)->toArray()]);
+            }
         }
     }
 }

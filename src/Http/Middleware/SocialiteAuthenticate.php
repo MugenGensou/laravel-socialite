@@ -31,13 +31,13 @@ class SocialiteAuthenticate
 
         $provider = strtolower($provider ?? $request->route('provider') ?? $request->get('provider'));
 
-        if (empty($provider) || !in_array($provider, array_keys(config("socialite.services")))) {
-            config('socialite.debug') && Log::debug('Not support this provider.');
+        if (empty($provider) || !in_array($provider, array_keys(config('socialite.providers', [])))) {
+            config('app.debug', false) && Log::debug('Not support this provider.');
 
             return $next($request);
         }
 
-        $scopes = config("socialite.services.{$provider}.scopes", []);
+        $scopes = config("socialite.providers.{$provider}.scopes", []);
 
         if (is_string($scopes)) {
             $scopes = array_map('trim', explode(',', $scopes));
@@ -47,7 +47,7 @@ class SocialiteAuthenticate
             $oauth = $this->manager->driver($provider);
 
             if ($request->has('code')) {
-                session(["socialite.{$provider}.user" => $oauth->user()]);
+                session(["socialite.{$provider}.user" => $oauth->user()->toArray()]);
 
                 Event::fire(new SocialiteUserAuthorized(session("socialite.{$provider}.user"), $isNewSession = true));
 
