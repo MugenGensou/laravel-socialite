@@ -84,16 +84,17 @@ class SocialiteServiceProvider extends ServiceProvider
         $user = config('socialite.mock_user');
 
         if (is_array($user) && !empty($user['open_id'])) {
-            $user = (new User([
-                'id'       => array_get($user, 'open_id'),
-                'name'     => array_get($user, 'nickname'),
-                'nickname' => array_get($user, 'nickname'),
-                'avatar'   => array_get($user, 'avatar'),
-                'email'    => null,
-            ]))->merge(['original' => $user]);
-
             foreach (array_keys(config('socialite.providers', [])) as $provider) {
-                session(["socialite.{$provider}.user" => $user->setProviderName($provider)->toArray()]);
+                session([
+                    "socialite.{$provider}.user" => new User([
+                        'id'       => array_get($user, 'open_id'),
+                        'name'     => array_get($user, 'nickname'),
+                        'nickname' => array_get($user, 'nickname'),
+                        'avatar'   => array_get($user, 'avatar'),
+                        'provider' => $provider,
+                        'email'    => null,
+                    ])
+                ]);
             }
         }
     }

@@ -47,7 +47,7 @@ class SocialiteAuthenticate
             $oauth = $this->manager->driver($provider);
 
             if ($request->has('code')) {
-                session(["socialite.{$provider}.user" => $oauth->user()->toArray()]);
+                session(["socialite.{$provider}.user" => $oauth->user()]);
 
                 Event::fire(new SocialiteUserAuthorized(session("socialite.{$provider}.user"), $isNewSession = true));
 

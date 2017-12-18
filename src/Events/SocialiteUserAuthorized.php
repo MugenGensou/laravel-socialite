@@ -28,12 +28,12 @@ class SocialiteUserAuthorized
     /**
      * Create a new event instance.
      *
-     * @param array $user
+     * @param User $user
      * @param bool $isNewSession
      */
-    public function __construct(array $user, bool $isNewSession = false)
+    public function __construct(User $user, bool $isNewSession = false)
     {
-        $this->user = new User($user);
+        $this->user = $user;
 
         $this->isNewSession = $isNewSession;
     }
@@ -61,7 +61,7 @@ class SocialiteUserAuthorized
     /**
      * @return SocialiteUser
      */
-    public function getSocialiteUser():?SocialiteUser
+    public function getSocialiteUser(): ? SocialiteUser
     {
         return $this->socialiteUser ?: $this->socialiteUser = tap(SocialiteUser::firstOrCreate([
             'platform' => 'web',
