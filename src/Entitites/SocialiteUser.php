@@ -17,6 +17,7 @@ class SocialiteUser extends Model
         'avatar'   => 'string',
         'token'    => 'collection',
     ];
+
     protected $fillable = [
         'user_id',
         'platform',

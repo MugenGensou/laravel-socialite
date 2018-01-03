@@ -61,7 +61,7 @@ class SocialiteUserAuthorized
     /**
      * @return SocialiteUser
      */
-    public function getSocialiteUser(): ? SocialiteUser
+    public function getSocialiteUser(): ?SocialiteUser
     {
         return $this->socialiteUser ?: $this->socialiteUser = tap(SocialiteUser::firstOrCreate([
             'platform' => 'web',

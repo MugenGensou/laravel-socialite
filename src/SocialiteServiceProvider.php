@@ -2,10 +2,7 @@
 
 namespace Mugen\LaravelSocialite;
 
-use Event;
 use Illuminate\Support\ServiceProvider;
-use Mugen\LaravelSocialite\Events\SocialiteUserAuthorized;
-use Mugen\LaravelSocialite\Listeners\AutoSaveSocialiteUser;
 use Overtrue\Socialite\SocialiteManager;
 use Overtrue\Socialite\User;
 
