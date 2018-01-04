@@ -36,7 +36,7 @@ class CreateSocialiteUsersTable extends Migration
             $table->string('name')->default('');
             $table->string('email')->default('');
             $table->string('avatar')->default('');
-            $table->json('token')->nullable();
+            $table->text('token')->nullable();
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
             $table->unique([
